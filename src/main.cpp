@@ -64,7 +64,7 @@ static void hide_service(ProcessMemory& mem, ptr_t base, const std::wstring& srv
             mem.Read(rec.name, 256 * sizeof(wchar_t), name);
             if (!std::wcscmp(name, srv_name.data()))
             {
-                std::printf("[+] Match found!\n");
+                std::printf("[+] Match found. Removing..\n");
                 // Check if it's first element in list.
                 //
                 if (cur_ptr == prev_ptr)
@@ -79,6 +79,7 @@ static void hide_service(ProcessMemory& mem, ptr_t base, const std::wstring& srv
                     //
                     mem.Write(prev_ptr + offsetof(record_t, next), sizeof(ptr_t), &rec.next);
                 }
+                break;
             }
         }
         prev_ptr = cur_ptr;
