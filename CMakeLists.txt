@@ -41,10 +41,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(argparse)
 
-# Options
-option(ZYDIS_BUILD_TOOLS OFF)
-option(ZYDIS_BUILD_EXAMPLES OFF)
-
 # Blackbone/src/BlackBone
 set(CMKR_CMAKE_FOLDER ${CMAKE_FOLDER})
 if(CMAKE_FOLDER)
