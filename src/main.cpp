@@ -50,7 +50,7 @@ static void dump_services(ProcessMemory& mem, ptr_t base)
     }
 }
 
-static void hide_service(ProcessMemory& mem, ptr_t base, const std::wstring& srv_name)
+static void hide_service(ProcessMemory& mem, ptr_t base, ptr_t base_loc, const std::wstring& srv_name)
 {
     record_t rec{ 0 };
     ptr_t prev_ptr = base;
@@ -69,9 +69,9 @@ static void hide_service(ProcessMemory& mem, ptr_t base, const std::wstring& srv
                 //
                 if (cur_ptr == prev_ptr)
                 {
-                    // Just set base to rec.next.
+                    // Just set base_loc to rec.next.
                     //
-                    mem.Write(base, sizeof(ptr_t), &rec.next);
+                    mem.Write(base_loc, sizeof(ptr_t), &rec.next);
                 }
                 else
                 {
@@ -186,7 +186,7 @@ int main(int argc, char** argv)
         if (program["--dump"] == true)
             dump_services(memory, services_db);
         if (!srv_name.empty())
-            hide_service(memory, services_db, { srv_name.begin(), srv_name.end() });
+            hide_service(memory, services_db, services_db_loc, { srv_name.begin(), srv_name.end() });
     }
     else
     {
