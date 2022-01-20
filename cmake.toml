@@ -1,0 +1,33 @@
+[project]
+name = "srvhide"
+
+[options]
+ZYDIS_BUILD_TOOLS = false
+ZYDIS_BUILD_EXAMPLES = false
+
+[fetch-content.argparse]
+git = "https://github.com/p-ranav/argparse.git"
+tag = "v2.2"
+
+[subdir."Blackbone/src/BlackBone"]
+cmake-after = """
+target_compile_features(BlackBone PUBLIC cxx_std_17)
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    link_directories(Blackbone/src/3rd_party/DIA/lib/amd64)
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+    link_directories(Blackbone/src/3rd_party/DIA/lib)
+endif()
+target_link_libraries(BlackBone PUBLIC diaguids.lib)
+target_include_directories(BlackBone PUBLIC Blackbone/src)
+"""
+
+[target.srvhide]
+type = "executable"
+sources = [
+    "src/*.cpp", 
+]
+compile-features = ["cxx_std_20"]
+link-libraries = [
+    "BlackBone",
+    "argparse"
+]
