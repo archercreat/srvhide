@@ -1,5 +1,5 @@
 # SrvHide
-Simple tool to dump/hide services from `services.exe` process. Once hid the service won't show in `services.msc`. The tool is based on [this](https://www.codeproject.com/Articles/46670/Service-Hiding) blogpost.
+Simple tool to dump/hide services in `services.exe` process. Once hid the service won't show in `services.msc`. The tool is based on [this](https://www.codeproject.com/Articles/46670/Service-Hiding) blogpost.
 
 ## Results
 ```
