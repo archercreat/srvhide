@@ -112,14 +112,14 @@ int main(int argc, char** argv)
 
     auto srv_name = program.get<std::string>("--service");
     auto do_dump  = program.get<bool>("--dump");
-    if (srv_name.empty() || !do_dump)
+    if (srv_name.empty() && !do_dump)
     {
         std::cerr << program;
         std::exit(1);
     }
 
     auto pids = Process::EnumByName(L"services.exe");
-    if (pids.empty() && pids.size() > 1)
+    if (pids.empty() || pids.size() > 1)
     {
         std::cerr << "Failed to find services.exe" << std::endl;
         std::exit(1);
