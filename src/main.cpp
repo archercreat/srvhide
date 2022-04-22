@@ -119,7 +119,7 @@ int main(int argc, char** argv)
     }
 
     auto pids = Process::EnumByName(L"services.exe");
-    if (pids.empty() || pids.size() > 1)
+    if (pids.empty() && pids.size() > 1)
     {
         std::cerr << "Failed to find services.exe" << std::endl;
         std::exit(1);
